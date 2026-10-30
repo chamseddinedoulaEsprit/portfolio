@@ -1,9 +1,13 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('nav a').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('href').substring(1);
-    const targetElement = document.getElementById(targetId);
-    targetElement.scrollIntoView({ behavior: 'smooth' });
-  });
+const toggle = document.getElementById('menu-toggle');
+const links = document.getElementById('navlinks');
+toggle?.addEventListener('click', () => {
+  const isOpen = links.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(isOpen));
+  toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
 });
+links?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  links.classList.remove('open');
+  toggle?.setAttribute('aria-expanded', 'false');
+  toggle?.setAttribute('aria-label', 'Open menu');
+}));
+document.getElementById('year').textContent = new Date().getFullYear();
